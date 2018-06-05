@@ -1,4 +1,4 @@
-"" Last update: 03.06.2018 20:34
+"" Last update: 06.06.2018 02:06
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -10,12 +10,11 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-scripts/LineJuggler'
+" Plugin 'vim-scripts/LineJuggler'
 Plugin 'svermeulen/vim-easyclip'
 Plugin 'tpope/vim-repeat'
 Plugin 'yegappan/grep'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'tomasr/molokai'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
@@ -26,6 +25,9 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'Yggdroot/indentLine'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -42,6 +44,8 @@ filetype plugin on
 " see :h vundle for ore details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+" indention levels hilighting
+let g:indentLine_char = '┆'
 " split settings
 set splitbelow
 set splitright
@@ -143,7 +147,7 @@ set undolevels=2048 " хранить историю изменений числ�
 "set virtualedit=all " позволяет курсору выходить за пределы строки
 "let c_syntax_for_h="" " необходимо установить для того, чтобы *.h файлам присваивался тип c, а не cpp
 " При вставке фрагмента сохраняет отступ
-set pastetoggle=
+" set pastetoggle=
 "подсвечивает все слова, которые совпадают со словом под курсором.
 autocmd CursorMoved * silent! exe printf("match Search /\\<%s\\>/", expand('<cword>'))
 
