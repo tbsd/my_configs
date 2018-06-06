@@ -1,4 +1,4 @@
-"" Last update: 06.06.2018 02:06
+"" Last update: 06.06.2018 21:36
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -283,10 +283,8 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 " Swap line with above (Uses easyClip)
 map <S-k> mmkP
-imap <S-k> <esc>mmkP
 " Swap line with below
 map <S-j> mmp
-imap <S-j> <esc>mmp
 " Disable swap lies on ctrl+j,k
 " nnoremap <C-J> <nop>
 " nnoremap <C-K> <no
