@@ -1,4 +1,4 @@
-"" Last update: 06.06.2018 21:36
+"" Last update: 07.06.2018 14:35
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -28,6 +28,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'sukima/xmledit'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -425,9 +426,9 @@ imap <F12> <esc>:NERDTreeToggle<cr>i
     " Обновление ctags <--
 
 " C(trl)+d - дублирование текущей строки
-imap <C-d> <esc>yypi
+" imap <C-d> <esc>yypi
 " Ctrl-пробел для автодополнения
-inoremap <C-space> <C-x><C-o>
+" inoremap <C-space> <C-x><C-o>
 " C-e - комментировать/раскомментировать (при помощи NERD_Comment)
 map <C-e> \cij
 nmap <C-e> \cij
