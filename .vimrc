@@ -1,4 +1,4 @@
-"" Last update: 07.06.2018 14:35
+"" Last update: 08.06.2018 01:32
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -17,7 +17,8 @@ Plugin 'yegappan/grep'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'SirVer/ultisnips'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'Lokaltog/vim-powerline'
@@ -29,6 +30,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'sukima/xmledit'
+Plugin 'vim-scripts/Conque-GDB'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -45,6 +47,9 @@ filetype plugin on
 " see :h vundle for ore details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+let g:ConqueTerm_Color = 2         " 1: strip color after 200 lines, 2: always with color
+let g:ConqueTerm_CloseOnEnd = 1    " close conque when program ends running
+let g:ConqueTerm_StartMessages = 0 " display warning messages if conqueTerm is configured incorrectly
 " indention levels hilighting
 let g:indentLine_char = '┆'
 " split settings
@@ -270,6 +275,11 @@ autocmd WinEnter * :call MyKeyMapHighlight() " при смене окна обн
 " vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
 
 "НАСТРОЙКИ ГОРЯЧИХ КЛАВИШ
+" Disable Arrow keys in Insert mode
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
 " Disable Arrow keys in Escape mode
 map <up> <nop>
 map <down> <nop>
@@ -286,13 +296,6 @@ nnoremap <C-H> <C-W><C-H>
 map <S-k> mmkP
 " Swap line with below
 map <S-j> mmp
-" Disable swap lies on ctrl+j,k
-" nnoremap <C-J> <nop>
-" nnoremap <C-K> <no
-" F2 - сохранить файл
-"nmap <F2> :w<cr>
-"vmap <F2> <esc>:w<cr>i
-"imap <F2> <esc>:w<cr>i
 " F3 - рекурсивный поиск по файлам (плагин grep.vim)
 nnoremap <silent> <F3> :Rgrep<cr>
 " Shift-F<F3> - добавление найденного к прошлым результатам поиска
