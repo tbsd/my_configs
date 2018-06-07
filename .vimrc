@@ -1,4 +1,4 @@
-"" Last update: 08.06.2018 01:32
+"" Last update: 08.06.2018 01:34
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -31,6 +31,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'sukima/xmledit'
 Plugin 'vim-scripts/Conque-GDB'
+Plugin 'terryma/vim-multiple-cursors'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
