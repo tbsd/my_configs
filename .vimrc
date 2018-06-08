@@ -1,4 +1,4 @@
-"" Last update: 08.06.2018 01:34
+"" Last update: 09.06.2018 00:08
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -32,6 +32,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'sukima/xmledit'
 Plugin 'vim-scripts/Conque-GDB'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -48,6 +50,12 @@ filetype plugin on
 " see :h vundle for ore details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+" vim-session
+let g:nerdtree_tabs_open_on_gui_startup=0  
+let g:nerdtree_tabs_open_on_new_tab=0
+let g:session_autoload = 'no'
+let g:session_autosave = 'no'
+
 let g:ConqueTerm_Color = 2         " 1: strip color after 200 lines, 2: always with color
 let g:ConqueTerm_CloseOnEnd = 1    " close conque when program ends running
 let g:ConqueTerm_StartMessages = 0 " display warning messages if conqueTerm is configured incorrectly
@@ -63,7 +71,8 @@ set wildmenu
 " colorscheme beekai
 " colorscheme badwolf
 colorscheme antares
-" 80 colum hilighting | i dunno what color of the column depends on
+hi Search guibg=background ctermbg=6
+hi Search guifg=background ctermfg=black
 hi ColorColumn ctermbg=233
 let &colorcolumn=join(range(81,999),",")
 " hilight line with the coursor
@@ -140,7 +149,7 @@ highlight SpellBad ctermfg=Black ctermbg=Red
 au BufWinLeave *.* silent mkview " при закрытии файла сохранить 'вид'
 au BufWinEnter *.* silent loadview " при открытии - восстановить сохранённый
 set backspace=indent,eol,start " backspace обрабатывает отступы, концы строк
-set sessionoptions=curdir,buffers,tabpages " опции сессий - перейти в текущую директорию, использовать буферы и табы
+set sessionoptions=curdir,buffers,tabpages " resize,winpos,winsize " опции сессий - перейти в текущую директорию, использовать буферы и табы
 set noswapfile " не использовать своп-файл (в него скидываются открытые буферы)
 set browsedir=current
 "set visualbell " вместо писка бипером мигать курсором при ошибках ввода
@@ -491,6 +500,3 @@ function! BackupDir()
 endfunction
 
 " nnoremap <F8> :colo random <Enter>
-
-" AUTORUN
-
