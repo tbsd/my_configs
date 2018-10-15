@@ -1,4 +1,4 @@
-"" Last update: 09.06.2018 00:08
+"" Last update: 15.10.2018 23:45
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -16,17 +16,20 @@ Plugin 'tpope/vim-repeat'
 Plugin 'yegappan/grep'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'Valloric/YouCompleteMe'
 " Plugin 'vim-syntastic/syntastic'
 Plugin 'w0rp/ale'
 Plugin 'SirVer/ultisnips'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'Lokaltog/vim-powerline'
+" if exists('NOTES')
+" else
+  Plugin 'Valloric/YouCompleteMe'
+  Plugin 'Yggdroot/indentLine'
+  Plugin 'Lokaltog/vim-powerline'
+" endif
 Plugin 'junegunn/vim-easy-align'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'sukima/xmledit'
@@ -49,6 +52,12 @@ filetype plugin on
 "
 " see :h vundle for ore details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" Sytax hilighting
+" let g:syntastic_cpp_compiler = 'clang++'
+" let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+let g:ycm_confirm_extra_conf=0
+" let g:ycm_extra_conf_globlist=1
 
 " vim-session
 let g:nerdtree_tabs_open_on_gui_startup=0  
