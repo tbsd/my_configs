@@ -1,4 +1,4 @@
-"" Last update: 15.10.2018 23:45
+"" Last update: 22.09.2019 17:47
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -11,18 +11,25 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " Plugin 'vim-scripts/LineJuggler'
-Plugin 'svermeulen/vim-easyclip'
+" Plugin 'svermeulen/vim-easyclip'
+"gm for 'generate mark' because m is used for move by easyclip
+" noremap gm m
 Plugin 'tpope/vim-repeat'
 Plugin 'yegappan/grep'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'jacquesbh/vim-showmarks'
+let g:showmarks_marks="qwertyuiop[]\\asdfghjkl;'zxcbnm,./QWERTYUIOP{}\":LKJHGFDSAZXCVBNM<>?1234567890-=`~!@#$%^&*()_+"
+set updatetime=100
+autocmd VimEnter * DoShowMarks!
+
 " Plugin 'vim-syntastic/syntastic'
 Plugin 'w0rp/ale'
 Plugin 'SirVer/ultisnips'
 Plugin 'jiangmiao/auto-pairs'
 " if exists('NOTES')
 " else
-  Plugin 'Valloric/YouCompleteMe'
+  " Plugin 'Valloric/YouCompleteMe'
   Plugin 'Yggdroot/indentLine'
   Plugin 'Lokaltog/vim-powerline'
 " endif
@@ -93,8 +100,6 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 set omnifunc=syntaxcomplete#Complete
 set number
-"gm for 'generate mark' because m is used for move by easyclip
-noremap gm m
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Align line-wise comment delimiters flush left instead of following code indentation
@@ -115,7 +120,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-
+"Save marks through restarts
+set viminfo='1000,f1
 "" Last update: 23.03.2016 08:44
 "" .vimrc  файл конфирурации для текстового редактора VIM
 "" dimio (http://dimio.org)
@@ -311,10 +317,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" Swap line with above (Uses easyClip)
-map <S-k> mmkP
-" Swap line with below
-map <S-j> mmp
 " F3 - рекурсивный поиск по файлам (плагин grep.vim)
 nnoremap <silent> <F3> :Rgrep<cr>
 " Shift-F<F3> - добавление найденного к прошлым результатам поиска
