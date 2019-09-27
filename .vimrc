@@ -1,4 +1,4 @@
-"" Last update: 22.09.2019 17:47
+"" Last update: 27.09.2019 23:00
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -10,6 +10,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'dhruvasagar/vim-table-mode'
 " Plugin 'vim-scripts/LineJuggler'
 " Plugin 'svermeulen/vim-easyclip'
 "gm for 'generate mark' because m is used for move by easyclip
@@ -66,7 +67,17 @@ filetype plugin on
 let g:ycm_confirm_extra_conf=0
 " let g:ycm_extra_conf_globlist=1
 
-" vim-session
+" vim-table-mode
+autocmd VimEnter * TableModeEnable
+" let g:table_mode_motion_up_map = '{<Bar>'
+" let g:table_mode_motion_down_map = '}<Bar>'
+" let g:table_mode_motion_left_map = '[<Bar>'
+" let g:table_mode_motion_right_map = ']<Bar>'
+let g:table_mode_motion_up_map = '<leader>j'
+let g:table_mode_motion_down_map = '<leader>j'
+let g:table_mode_motion_left_map = '<leader>h'
+let g:table_mode_motion_right_map = '<leader>l'
+
 let g:nerdtree_tabs_open_on_gui_startup=0  
 let g:nerdtree_tabs_open_on_new_tab=0
 let g:session_autoload = 'no'
@@ -185,10 +196,10 @@ autocmd CursorMoved * silent! exe printf("match Search /\\<%s\\>/", expand('<cwo
 
 "НАСТРОЙКИ ПЕРЕМЕННЫХ ОКРУЖЕНИЯ
 if has('win32')
-   let $VIMRUNTIME = $HOME.'\Programs\Vim\vim72'
-   source $VIMRUNTIME/mswin.vim
+  let $VIMRUNTIME = $HOME.'\Programs\Vim\vim72'
+  source $VIMRUNTIME/mswin.vim
 else
-   let $VIMRUNTIME = $HOME.'/.vim'
+  let $VIMRUNTIME = $HOME.'/.vim'
 endif
 
 "НАСТРОЙКИ ПОИСКА ТЕКСТА В ОТКРЫТЫХ ФАЙЛАХ
@@ -261,17 +272,17 @@ au FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
 " Установка шрифта (для Windows и Linux)
 " настройка внешнего вида для GUI
 if has('gui')
-    " отключаем графические табы (останутся текстовые,
-    " занимают меньше места на экране)
-    set guioptions-=e
-    " отключить показ иконок в окне GUI (файл, сохранить и т.д.)
-    set guioptions-=T
+  " отключаем графические табы (останутся текстовые,
+  " занимают меньше места на экране)
+  set guioptions-=e
+  " отключить показ иконок в окне GUI (файл, сохранить и т.д.)
+  set guioptions-=T
 
-    if has('win32')
-        set guifont=Lucida_Console:h10:cRUSSIAN::
-    else
-        set guifont=Terminus\ 10
-    endif
+  if has('win32')
+    set guifont=Lucida_Console:h10:cRUSSIAN::
+  else
+    set guifont=Terminus\ 10
+  endif
 endif
 
 
@@ -281,11 +292,11 @@ set keymap=russian-jcukenwin " настраиваем переключение �
 set iminsert=0 " раскладка по умолчанию - английская
 set imsearch=0 " аналогично для строки поиска и ввода команд
 function! MyKeyMapHighlight()
-   if &iminsert == 0 " при английской раскладке статусная строка текущего окна будет серого цвета
-      hi StatusLine ctermfg=White guifg=White
-   else " а при русской - зеленого.
-      hi StatusLine ctermfg=DarkRed guifg=DarkRed
-   endif
+  if &iminsert == 0 " при английской раскладке статусная строка текущего окна будет серого цвета
+    hi StatusLine ctermfg=White guifg=White
+  else " а при русской - зеленого.
+    hi StatusLine ctermfg=DarkRed guifg=DarkRed
+  endif
 endfunction
 " call MyKeyMapHighlight() " при старте Vim устанавливать цвет статусной строки
 autocmd WinEnter * :call MyKeyMapHighlight() " при смене окна обновлять информацию о раскладках
@@ -371,83 +382,83 @@ imap <F12> <esc>:NERDTreeToggle<cr>i
 " imap <C-w> <ESC>:tabclose<cr>
 
 "" Переключение кодировок файла
-   " Меню Encoding -->
-        " Выбор кодировки, в которой читать файл -->
-            set wildmenu
-            set wcm=<Tab>
-            menu Encoding.Read.utf-8<Tab><F7> :e ++enc=utf8 <CR>
-            menu Encoding.Read.windows-1251<Tab><F7> :e ++enc=cp1251<CR>
-            menu Encoding.Read.koi8-r<Tab><F7> :e ++enc=koi8-r<CR>
-            menu Encoding.Read.cp866<Tab><F7> :e ++enc=cp866<CR>
-            map <F8> :emenu Encoding.Read.<TAB>
-        " Выбор кодировки, в которой читать файл <--
+" Меню Encoding -->
+" Выбор кодировки, в которой читать файл -->
+set wildmenu
+set wcm=<Tab>
+menu Encoding.Read.utf-8<Tab><F7> :e ++enc=utf8 <CR>
+menu Encoding.Read.windows-1251<Tab><F7> :e ++enc=cp1251<CR>
+menu Encoding.Read.koi8-r<Tab><F7> :e ++enc=koi8-r<CR>
+menu Encoding.Read.cp866<Tab><F7> :e ++enc=cp866<CR>
+map <F8> :emenu Encoding.Read.<TAB>
+" Выбор кодировки, в которой читать файл <--
 
-        " Выбор кодировки, в которой сохранять файл -->
-            set wildmenu
-            set wcm=<Tab>
-            menu Encoding.Write.utf-8<Tab><S-F7> :set fenc=utf8 <CR>
-            menu Encoding.Write.windows-1251<Tab><S-F7> :set fenc=cp1251<CR>
-            menu Encoding.Write.koi8-r<Tab><S-F7> :set fenc=koi8-r<CR>
-            menu Encoding.Write.cp866<Tab><S-F7> :set fenc=cp866<CR>
-            map <S-F7> :emenu Encoding.Write.<TAB>
-        " Выбор кодировки, в которой сохранять файл <--
+" Выбор кодировки, в которой сохранять файл -->
+set wildmenu
+set wcm=<Tab>
+menu Encoding.Write.utf-8<Tab><S-F7> :set fenc=utf8 <CR>
+menu Encoding.Write.windows-1251<Tab><S-F7> :set fenc=cp1251<CR>
+menu Encoding.Write.koi8-r<Tab><S-F7> :set fenc=koi8-r<CR>
+menu Encoding.Write.cp866<Tab><S-F7> :set fenc=cp866<CR>
+map <S-F7> :emenu Encoding.Write.<TAB>
+" Выбор кодировки, в которой сохранять файл <--
 
-        " Выбор формата концов строк (dos - <CR><NL>, unix - <NL>, mac - <CR>) -->
-            set wildmenu
-            set wcm=<Tab>
-            menu Encoding.End_line_format.unix<Tab><C-F7> :set fileformat=unix<CR>
-            menu Encoding.End_line_format.dos<Tab><C-F7> :set fileformat=dos<CR>
-            menu Encoding.End_line_format.mac<Tab><C-F7> :set fileformat=mac<CR>
-            map <C-F7> :emenu Encoding.End_line_format.<TAB>
-        " Выбор формата концов строк (dos - <CR><NL>, unix - <NL>, mac - <CR>) <--
-    " Меню Encoding <--
+" Выбор формата концов строк (dos - <CR><NL>, unix - <NL>, mac - <CR>) -->
+set wildmenu
+set wcm=<Tab>
+menu Encoding.End_line_format.unix<Tab><C-F7> :set fileformat=unix<CR>
+menu Encoding.End_line_format.dos<Tab><C-F7> :set fileformat=dos<CR>
+menu Encoding.End_line_format.mac<Tab><C-F7> :set fileformat=mac<CR>
+map <C-F7> :emenu Encoding.End_line_format.<TAB>
+" Выбор формата концов строк (dos - <CR><NL>, unix - <NL>, mac - <CR>) <--
+" Меню Encoding <--
 
-    " Включение автоматического разбиения строки на несколько
-    " строк фиксированной длины
-   " menu Textwidth.off :set textwidth=0<CR>
-   " menu Textwidth.on :set textwidth=78<CR>
-    " Проверка орфографии -->
-        if version >= 700
-            " По умолчанию проверка орфографии выключена.
-            set spell spelllang=
-            set nospell
-            menu Spell.off :setlocal spell spelllang=<CR>:setlocal nospell<CR>
-            menu Spell.Russian+English :setlocal spell spelllang=ru,en<CR>
-            menu Spell.Russian :setlocal spell spelllang=ru<CR>
-            menu Spell.English :setlocal spell spelllang=en<CR>
-            menu Spell.-SpellControl- :
-            menu Spell.Word\ Suggest<Tab>z= z=
-            menu Spell.Add\ To\ Dictionary<Tab>zg zg
-            menu Spell.Add\ To\ TemporaryDictionary<Tab>zG zG
-            menu Spell.Remove\ From\ Dictionary<Tab>zw zw
-            menu Spell.Remove\ From\ Temporary\ Dictionary<Tab>zW zW
-            menu Spell.Previous\ Wrong\ Word<Tab>[s [s
-            menu Spell.Next\ Wrong\ Word<Tab>]s ]s
-        endif
-    " Проверка орфографии <--
+" Включение автоматического разбиения строки на несколько
+" строк фиксированной длины
+" menu Textwidth.off :set textwidth=0<CR>
+" menu Textwidth.on :set textwidth=78<CR>
+" Проверка орфографии -->
+if version >= 700
+  " По умолчанию проверка орфографии выключена.
+  set spell spelllang=
+  set nospell
+  menu Spell.off :setlocal spell spelllang=<CR>:setlocal nospell<CR>
+  menu Spell.Russian+English :setlocal spell spelllang=ru,en<CR>
+  menu Spell.Russian :setlocal spell spelllang=ru<CR>
+  menu Spell.English :setlocal spell spelllang=en<CR>
+  menu Spell.-SpellControl- :
+  menu Spell.Word\ Suggest<Tab>z= z=
+  menu Spell.Add\ To\ Dictionary<Tab>zg zg
+  menu Spell.Add\ To\ TemporaryDictionary<Tab>zG zG
+  menu Spell.Remove\ From\ Dictionary<Tab>zw zw
+  menu Spell.Remove\ From\ Temporary\ Dictionary<Tab>zW zW
+  menu Spell.Previous\ Wrong\ Word<Tab>[s [s
+  menu Spell.Next\ Wrong\ Word<Tab>]s ]s
+endif
+" Проверка орфографии <--
 
-    " Обертка для :make -->
-        nmap ,m :call make<CR>
-        nmap ,w :cwindow<CR>
-        nmap ,n :cnext<CR>
-        nmap ,p :cprevious<CR>
-        nmap ,l :clist<CR>
+" Обертка для :make -->
+nmap ,m :call make<CR>
+nmap ,w :cwindow<CR>
+nmap ,n :cnext<CR>
+nmap ,p :cprevious<CR>
+nmap ,l :clist<CR>
 
-        menu Make.Make<Tab>,m ,m
-        menu Make.Make\ Window<Tab>,w ,w
-        menu Make.Next\ Error<Tab>,n ,n
-        menu Make.Previous\ Error<Tab>,p ,p
-        menu Make.Errors\ List<Tab>,l ,l
-    " Обертка для :make <--
+menu Make.Make<Tab>,m ,m
+menu Make.Make\ Window<Tab>,w ,w
+menu Make.Next\ Error<Tab>,n ,n
+menu Make.Previous\ Error<Tab>,p ,p
+menu Make.Errors\ List<Tab>,l ,l
+" Обертка для :make <--
 
-    " Обновление ctags -->
-        function! MyUpdateCtags()
-            echo "Update ctags function is not setted."
-        endfunction
-        let MyUpdateCtagsFunction = "MyUpdateCtags"
-        nmap <F5> :call {MyUpdateCtagsFunction}()<CR>
-        menu ctags.Update<Tab><F5> <F5>
-    " Обновление ctags <--
+" Обновление ctags -->
+function! MyUpdateCtags()
+  echo "Update ctags function is not setted."
+endfunction
+let MyUpdateCtagsFunction = "MyUpdateCtags"
+nmap <F5> :call {MyUpdateCtagsFunction}()<CR>
+menu ctags.Update<Tab><F5> <F5>
+" Обновление ctags <--
 
 " C(trl)+d - дублирование текущей строки
 " imap <C-d> <esc>yypi
@@ -465,49 +476,50 @@ imap <C-e> <ESC>\ciij
 " и настроечный файл для IDE.
 " Установить метод свертки блоков кода по отступам
 function! SetPerlConf()
-    compiler perl
-    "" source "$VIMRUNTIME/IDE/perl-ide.vim"
-    set foldmethod=indent
-    " настройка плагина подсветки синтаксиса для Mojolicious
-    " github.com/yko/mojo.vim
-    " подсвечивать perl-код в секции __DATA__ perl-файлов
-    let mojo_highlight_data = 1
+  compiler perl
+  "" source "$VIMRUNTIME/IDE/perl-ide.vim"
+  set foldmethod=indent
+  " настройка плагина подсветки синтаксиса для Mojolicious
+  " github.com/yko/mojo.vim
+  " подсвечивать perl-код в секции __DATA__ perl-файлов
+  let mojo_highlight_data = 1
 endfunction
 
 "" Поиск выделенного текста (frantsev.ru/configs/vimrc.txt)
 function! VisualSearch()
-   let l:old_reg=getreg('"')
-   let l:old_regtype=getregtype('"')
-   normal! gvy
-   let @/=escape(@@, '$.*/\[]')
-   normal! gV
-   call setreg('"', l:old_reg, l:old_regtype)
+  let l:old_reg=getreg('"')
+  let l:old_regtype=getregtype('"')
+  normal! gvy
+  let @/=escape(@@, '$.*/\[]')
+  normal! gV
+  call setreg('"', l:old_reg, l:old_regtype)
 endfunction
 
 "" Удалить пробелы в конце строк (frantsev)
 function! RemoveTrailingSpaces()
-   normal! mzHmy
-   execute '%s:\s\+$::ge'
-   normal! 'yzt`z
+  normal! mzHmy
+  execute '%s:\s\+$::ge'
+  normal! 'yzt`z
 endfunction
 
 "" Сохранять умные резервные копии ежедневно
 function! BackupDir()
-   " определим каталог для сохранения резервной копии
-   if has('win32')
-        let l:backupdir = $TEMP.'\backup'
-    else
-        let l:backupdir = $VIMRUNTIME.'/backup/'.
-        \substitute(expand('%:p:h'), '^'.$HOME, '~', '')
-    endif
-   " если каталог не существует, создадим его рекурсивно
-   if !isdirectory(l:backupdir)
-      call mkdir(l:backupdir, 'p', 0700)
-   endif
-   " переопределим каталог для резервных копий
-   let &backupdir=l:backupdir
-   " переопределим расширение файла резервной копии
-   let &backupext=strftime('~%Y-%m-%d~')
+  " определим каталог для сохранения резервной копии
+  if has('win32')
+    let l:backupdir = $TEMP.'\backup'
+  else
+    let l:backupdir = $VIMRUNTIME.'/backup/'.
+          \substitute(expand('%:p:h'), '^'.$HOME, '~', '')
+  endif
+  " если каталог не существует, создадим его рекурсивно
+  if !isdirectory(l:backupdir)
+    call mkdir(l:backupdir, 'p', 0700)
+  endif
+  " переопределим каталог для резервных копий
+  let &backupdir=l:backupdir
+  " переопределим расширение файла резервной копии
+  let &backupext=strftime('~%Y-%m-%d~')
 endfunction
 
 " nnoremap <F8> :colo random <Enter>
+
