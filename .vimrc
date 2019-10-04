@@ -126,15 +126,6 @@ imap <C-e> <ESC>\ciij
 let g:showmarks_marks="qwertyuiop[]\\asdfghjkl;'zxcbnm,./QWERTYUIOP{}\":LKJHGFDSAZXCVBNM<>?1234567890-=`~!@#$%^&*()_+"
 set updatetime=100
 autocmd VimEnter * DoShowMarks
-" syntastic settings
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" indention levels hilighting
 let g:indentLine_char = '┆'
 " vim-table-mode
 autocmd VimEnter * TableModeEnable
@@ -161,11 +152,3 @@ let g:NERDAltDelims_c = 1
 " nerd tree open on start with directory as an argument
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
-" WTF is this
-" let g:ConqueTerm_Color = 2         " 1: strip color after 200 lines, 2: always with color
-" let g:ConqueTerm_CloseOnEnd = 1    " close conque when program ends running
-" let g:ConqueTerm_StartMessages = 0 " display warning messages if conqueTerm is configured incorrectly
-" fixes error message
-" let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-" set omnifunc=syntaxcomplete#Complete
