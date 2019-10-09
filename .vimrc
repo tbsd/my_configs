@@ -21,6 +21,10 @@ Plugin 'xolox/vim-session'
 Plugin 'vim-scripts/matchit.zip'
 Plugin 'heavenshell/vim-pydocstring'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'idanarye/vim-vebugger'
+  Plugin 'Shougo/vimproc.vim'
+  " cd ~/.vim/bundle/vimproc.vim && make
+  " GDB LLDB JDB Mdbg PDB RDebug NInspect
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 "filetype plugin indent on    " required
@@ -82,6 +86,9 @@ au BufWinEnter *.* silent loadview " при открытии - восстано�
 set noswapfile " не использовать своп-файл (в него скидываются открытые буферы)
 " set browsedir=current
 set backup " включить сохранение резервных копий
+set backupdir=~/.vim/backup/
+set directory=~/.vim/swp/
+set undodir=~/.vim/undo/
 set title " показывать имя буфера в заголовке терминала
 " подсвечивает все слова, которые совпадают со словом под курсором.
 autocmd CursorMoved * silent! exe printf("match Search /\\<%s\\>/", expand('<cword>'))
