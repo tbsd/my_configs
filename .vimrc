@@ -34,7 +34,9 @@ filetype plugin on
 " CUSTOM SETTINGS
 " ru layout hotkeys in normalmode
 " https://github.com/ierton/xkb-switch
-autocmd InsertLeave * silent! !xkb-switch -s us
+let current_layout='us'
+autocmd InsertEnter * let a = system('xkb-switch -s '. current_layout)
+autocmd InsertLeave * let current_layout = system('xkb-switch') | silent!  !xkb-switch -s us
 " split settings
 set splitbelow
 " set splitright
