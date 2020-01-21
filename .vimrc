@@ -32,6 +32,9 @@ call vundle#end()            " required
 filetype plugin on
 
 " CUSTOM SETTINGS
+" ru layout hotkeys in normalmode
+" https://github.com/ierton/xkb-switch
+autocmd InsertLeave * silent! !xkb-switch -s us
 " split settings
 set splitbelow
 " set splitright
@@ -210,6 +213,14 @@ function! PydocImproved()
     normal j$
   endif
 endfunction
+"change layout to us when out of insert mode
+" function! ChangeLayout()
+  " exe silent! setxkbmap -layout us;sleep 1; setxkbmap -layout us,ru
+  " :!setxkbmap -layout us
+  " :!sleep 0.5
+  " :!setxkbmap -layout us,ru
+" endfunction
+
 " syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
