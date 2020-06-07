@@ -6,6 +6,7 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'tclem/vim-arduino'
 Plugin 'ervandew/supertab'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'tpope/vim-repeat'
@@ -22,7 +23,10 @@ Plugin 'vim-scripts/matchit.zip'
 Plugin 'heavenshell/vim-pydocstring'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'idanarye/vim-vebugger'
-  Plugin 'Shougo/vimproc.vim'
+Plugin 'OmniSharp/omnisharp-vim'
+Plugin 'Shougo/vimproc.vim'
+" Plugin 'godlygeek/tabular'
+" Plugin 'plasticboy/vim-markdown'
   " cd ~/.vim/bundle/vimproc.vim && make
   " GDB LLDB JDB Mdbg PDB RDebug NInspect
 " All of your Plugins must be added before the following line
@@ -32,13 +36,21 @@ call vundle#end()            " required
 filetype plugin on
 
 " CUSTOM SETTINGS
+" lines wraps the screen without breaking words in the middle
+set formatoptions=1
+set linebreak
 " ru layout hotkeys in normalmode
 " https://github.com/ierton/xkb-switch
-let current_layout='us'
-autocmd InsertEnter * let a = system('xkb-switch -s '. current_layout)
-autocmd InsertLeave * let current_layout = system('xkb-switch') | silent!  !xkb-switch -s us
-autocmd CmdlineEnter /,\? let a = system('xkb-switch -s '. current_layout)
-autocmd CmdlineLeave /,\? let current_layout = system('xkb-switch') | silent!  !xkb-switch -s us
+" autocmd InsertLeave * FixLayout()
+" function! FixLayout()
+  " let g:XkbSwitchLib = "/usr/local/lib/libxkbswitch.so"
+  " call libcall(g:XkbSwitchLib, 'Xkb_Switch_setXkbLayout', 'us')
+" endfunction
+let g:current_layout='us'
+autocmd InsertEnter * let a = system('xkb-switch -s '. g:current_layout)
+autocmd InsertLeave * let g:current_layout = system('xkb-switch') | silent!  !xkb-switch -s us
+autocmd CmdlineEnter /,\? let a = system('xkb-switch -s '. g:current_layout)
+autocmd CmdlineLeave /,\? let g:current_layout = system('xkb-switch') | silent!  !xkb-switch -s us
 " split settings
 set splitbelow
 " set splitright
@@ -49,11 +61,14 @@ set wildmode=longest,list:longest
 colorscheme antares
 "Проблема красного на красном при spellchecking-е решается такой строкой в .vimrc
 highlight SpellBad ctermfg=Black ctermbg=Red
+" highlight SpellBad ctermfg=Red ctermbg=White
 "" Подсвечивать табы и пробелы в конце строки
 set list " включить подсветку
 set listchars=tab:>-,trail:- " установить символы, которыми будет осуществляться подсветка
 " hilight line with the coursor
 set cursorline
+au VimEnter * highlight CursorLine ctermbg=Black
+" set cursorcolumn
 " cursor color hack
 au ColorScheme * hi Search ctermfg=Yellow ctermbg=Black
 " hilight area behind 80 column
@@ -64,7 +79,6 @@ set shiftwidth=2 " размер отступов (нажатие на << или 
 set softtabstop=2
 set tabstop=2 " ширина табуляции
 set autoindent " ai - включить автоотступы (копируется отступ предыдущей строки)
-"set expandtab " преобразовать табуляцию в пробелы
 set smartindent " Умные отступы (например, автоотступ после {)
 " формат файла по умолчанию (влияет на окончания строк) - будет перебираться в указанном порядке
 set fileformat=unix
@@ -108,13 +122,20 @@ au VimEnter * set relativenumber
 let g:ycm_confirm_extra_conf=0
 
 " Hotkeys
-" close buffer
-nnoremap <F4> :bd<cr>
+" go through one splited line
+" hack allowing to use alt key as a modifier:
+" in bash enter cat then press alt+<key>, use printed symbol for map
+nmap j gj
+vmap j gj
+nmap k gk
+vmap k gk
 " split navigation
+nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" close buffer
+nnoremap <F4> :bd<cr>
 " предыдущий буфер
 map <F1> :bp<cr>
 vmap <F1> <esc>:bp<cr>i
@@ -132,8 +153,15 @@ map <C-e> \cij
 nmap <C-e> \cij
 imap <C-e> <ESC>\ciij
 
+" folding
+nmap <Space> za
+vmap <Space> za
 
 " PLUGINS SETTINGS
+" arduino vim
+let g:vim_arduino_serial_port = '/dev/ttyUSB0'
+au BufRead,BufNewFile *.pde set filetype=arduino
+au BufRead,BufNewFile *.ino set filetype=arduino
 " vim-showmarks
 let g:showmarks_marks="qwertyuiop[]\\asdfghjkl;'zxcbnm,./QWERTYUIOP{}\":LKJHGFDSAZXCVBNM<>?1234567890-=`~!@#$%^&*()_+"
 set updatetime=100
@@ -228,3 +256,40 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers=['flake8']
+
+
+set expandtab " преобразовать табуляцию в пробелы
+
+" fold region for headings
+au FileType markdown syn region mkdHeaderFold
+    \ start="^\s*\z(#\+\)"
+    \ skip="^\s*\z1#\+"
+    \ end="^\(\s*#\)\@="
+    \ fold contains=TOP
+
+" fold region for lists
+au FileType markdown syn region mkdListFold
+    \ start="^\z(\s*\)\*\z(\s*\)"
+    \ skip="^\z1 \z2\s*[^#]"
+    \ end="^\(^\)\@="
+    \ fold contains=TOP
+
+    " \ end="^\(.\)\@="
+au FileType markdown syn sync fromstart
+au FileType markdown set foldmethod=syntax
+
+" spellcheck
+set spelllang=ru_ru
+function! SwitchSepllcheck()
+  if &spelllang=='ru_ru'
+    setlocal spell spelllang=en_us
+  else
+    setlocal spell spelllang=ru_ru
+  endif
+endfunction
+
+autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufRead,BufNewFile *.txt setlocal spell
+autocmd BufRead,BufNewFile *.tex setlocal spell
+autocmd BufRead,BufNewFile *.bib setlocal spell
+nmap <C-n> :call SwitchSepllcheck()<CR>
