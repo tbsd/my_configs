@@ -25,6 +25,7 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'idanarye/vim-vebugger'
 Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'Shougo/vimproc.vim'
+Plugin 'moll/vim-bbye'
 " Plugin 'godlygeek/tabular'
 " Plugin 'plasticboy/vim-markdown'
   " cd ~/.vim/bundle/vimproc.vim && make
@@ -135,7 +136,7 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 " close buffer
-nnoremap <F4> :bd<cr>
+nnoremap <F3> :Bdelete<CR>
 " предыдущий буфер
 map <F1> :bp<cr>
 vmap <F1> <esc>:bp<cr>i
@@ -293,3 +294,4 @@ autocmd BufRead,BufNewFile *.txt setlocal spell
 autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd BufRead,BufNewFile *.bib setlocal spell
 nmap <C-n> :call SwitchSepllcheck()<CR>
+
