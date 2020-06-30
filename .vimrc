@@ -153,6 +153,8 @@ imap <F12> <esc>:NERDTreeToggle<cr>i
 map <C-e> \cij
 nmap <C-e> \cij
 imap <C-e> <ESC>\ciij
+" build and run
+nnoremap <F4> :w<CR> :!./build.sh<CR>
 
 " folding
 nmap <Space> za
