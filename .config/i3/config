@@ -244,7 +244,7 @@ bindsym --release $mod+ctrl+Del exec gnome-terminal --role="task manager" -- hto
 bindsym --release $mod+shift+Esc exec gnome-terminal --role="task manager" -- htop
 
 # Notes
-bindsym --release Super_L+s exec gnome-terminal --role="Notes" -- vim -S ~/.vim/sessions/default.vim
+bindsym --release $mod+ctrl+s exec gnome-terminal --role="Notes" -- vim -S ~/.vim/sessions/default.vim
 
 # File manager
 # bindsym $mod+Super_L+j exec nemo
