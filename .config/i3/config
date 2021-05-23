@@ -41,14 +41,13 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+apostrophe exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-bindsym $mod+semicolon exec dmenu_run
+bindsym $mod+semicolon exec "xkb-switch -s us; dmenu_run"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -185,11 +184,11 @@ bar {
 
 # Take a screenshot
 # all screens
-bindsym --release Print exec scrot /tmp/'Screenshot_%Y-%m-%d_%H-%M-%S.png'
+bindsym --release Print exec scrot -p /tmp/'Screenshot_%Y-%m-%d_%H-%M-%S.png'
 # ative window
-bindsym --release ctrl+Print exec scrot -u /tmp/'Screenshot_%Y-%m-%d_%H-%M-%S.png'
+bindsym --release ctrl+Print exec scrot -up /tmp/'Screenshot_%Y-%m-%d_%H-%M-%S.png'
 # selected window or region
-bindsym --release shift+Print exec import "/tmp/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
+bindsym --release shift+Print exec scrot -sp /tmp/'Screenshot_%Y-%m-%d_%H-%M-%S.png'
 
 # Make some apps (unreal engine editor, mpv, ...) windows float by default
 # xprop for window information
@@ -237,7 +236,7 @@ bindsym $mod+ctrl+m exec pavucontrol
 # bindsym $mod+ctrl+semicolon exec pavucontrol
 
 # Calendar
-bindsym --release $mod+c exec gnome-terminal --geometry="44x9" --role="calendar" -- ~/Documents/scripts/calendar.sh
+bindsym --release $mod+c exec gnome-terminal --geometry="66x36" --role="calendar" -- ~/Documents/scripts/calendar.sh
 
 # Task manager
 bindsym --release $mod+ctrl+Del exec gnome-terminal --role="task manager" -- htop
@@ -282,3 +281,6 @@ exec numlockx on
 
 # Create new workspace with free number
 bindsym $mod+n exec ~/Documents/scripts/new_i3_workspace.sh
+
+# run mpd on starutp
+exec mpd
