@@ -44,7 +44,7 @@ floating_modifier $mod
 bindsym $mod+apostrophe exec i3-sensible-terminal
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+ctrl+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+semicolon exec "xkb-switch -s us; dmenu_run"
@@ -59,23 +59,17 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+ctrl+h move left
+bindsym $mod+ctrl+j move down
+bindsym $mod+ctrl+k move up
+bindsym $mod+ctrl+l move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+ctrl+Left move left
+bindsym $mod+ctrl+Down move down
+bindsym $mod+ctrl+Up move up
+bindsym $mod+ctrl+Right move right
 
 # split in horizontal orientation
 bindsym $mod+b split h
@@ -92,7 +86,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+ctrl+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -129,23 +123,23 @@ bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+ctrl+1 move container to workspace number $ws1
+bindsym $mod+ctrl+2 move container to workspace number $ws2
+bindsym $mod+ctrl+3 move container to workspace number $ws3
+bindsym $mod+ctrl+4 move container to workspace number $ws4
+bindsym $mod+ctrl+5 move container to workspace number $ws5
+bindsym $mod+ctrl+6 move container to workspace number $ws6
+bindsym $mod+ctrl+7 move container to workspace number $ws7
+bindsym $mod+ctrl+8 move container to workspace number $ws8
+bindsym $mod+ctrl+9 move container to workspace number $ws9
+bindsym $mod+ctrl+0 move container to workspace number $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+ctrl+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+ctrl+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+ctrl+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -195,17 +189,19 @@ bindsym --release shift+Print exec scrot -sp /tmp/'Screenshot_%Y-%m-%d_%H-%M-%S.
 for_window [class="mpv"] floating enable
 for_window [class="UE4Editor"] floating enable
 for_window [window_role="calendar"] floating enable
+for_window [class="Steam"] floating enable
 
 # [assigned workspace] for some apps (UE4, xnview, ...) which shold be opened fullscreen by default
 # assign [class="XnView"] 10
 # for_window [class="xnview"] fullscreen enable
 
 # Change layout; need second option to fix i3lock
-exec "setxkbmap -layout us,ru -option compose:caps -option grp:lctrl_lwin_toggle"
+#exec "setxkbmap -layout us,ru -option compose:caps -option grp:lctrl_lwin_toggle"
+exec_always "setxkbmap -layout us,ru -option compose:caps -option grp:alt_shift_toggle"
 # force update i3status
 bindsym ISO_Next_Group exec pkill -USR1 i3status
 # Different layouts for different windows
-exec --no-startup-id "python3 ~/Documents/scripts/different_layouts_for_windows.py"
+# exec --no-startup-id "python3 ~/Documents/scripts/different_layouts_for_windows.py"
 bindsym Super_L nop
 # bindsym $mod+y nop
 # bindsym Caps_Lock  nop
@@ -213,11 +209,11 @@ bindsym Super_L nop
 bindsym --release shift+Menu exec "~/Documents/scripts/lockscreen.sh; systemctl suspend"
 
 # Move workspase to different display
-bindsym $mod+ctrl+h move workspace to output left
-bindsym $mod+ctrl+l move workspace to output right
+bindsym $mod+Super_L+h move workspace to output left
+bindsym $mod+Super_L+l move workspace to output right
 
 # Change terminal settings ($PATH, ...)
-# exec_always --no-startup-id "export PATH=\"~/Documents/scripts/\":\"~/.cargo/bin/\":$JAVA_HOME/bin:/opt/:/opt/idea-IC-191.7479.19/bin/:/opt/clion/bin/:$PATH"
+# exec_always --no-startup-id "export PATH=\"~/Documents/scripts/\":\"~/.cargo/bin/\":$JAVA_HOME/bin:/opt/:/opt/idea-IC-191.7479.19/bin/:/opt/clion/bin/:/opt/qtcreator/bin/:$PATH"
 
 # Change focus on mouse hover
 focus_follows_mouse no
@@ -229,11 +225,11 @@ force_xinerama yes
 workspace_auto_back_and_forth yes
 
 # Sound control
-bindsym $mod+ctrl+j exec "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%"
-bindsym $mod+ctrl+k exec "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%"
-# bindsym $mod+ctrl+m exec pactl set-sink-mute 0 toggle
-bindsym $mod+ctrl+m exec pavucontrol
-# bindsym $mod+ctrl+semicolon exec pavucontrol
+bindsym ctrl+shift+j exec "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%"
+bindsym ctrl+shift+k exec "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%"
+# bindsym Super_L+m exec pactl set-sink-mute 0 toggle
+bindsym ctrl+m exec pavucontrol
+# bindsym Super_L+semicolon exec pavucontrol
 
 # Calendar
 bindsym --release $mod+c exec gnome-terminal --geometry="66x36" --role="calendar" -- ~/Documents/scripts/calendar.sh
@@ -259,16 +255,16 @@ bindsym --release $mod+ctrl+Delete exec gnome-terminal --role="taskmanager" -- h
 bindsym --release ctrl+shift+Escape exec gnome-terminal --role="taskmanager" -- htop
 
 # Move all windows to workspace
-bindsym $mod+ctrl+1 rename workspace to $ws1
-bindsym $mod+ctrl+2 rename workspace to $ws2
-bindsym $mod+ctrl+3 rename workspace to $ws3
-bindsym $mod+ctrl+4 rename workspace to $ws4
-bindsym $mod+ctrl+5 rename workspace to $ws5
-bindsym $mod+ctrl+6 rename workspace to $ws6
-bindsym $mod+ctrl+7 rename workspace to $ws7
-bindsym $mod+ctrl+8 rename workspace to $ws8
-bindsym $mod+ctrl+9 rename workspace to $ws9
-bindsym $mod+ctrl+0 rename workspace to $ws10
+bindsym $mod+Super_L+1 rename workspace to $ws1
+bindsym $mod+Super_L+2 rename workspace to $ws2
+bindsym $mod+Super_L+3 rename workspace to $ws3
+bindsym $mod+Super_L+4 rename workspace to $ws4
+bindsym $mod+Super_L+5 rename workspace to $ws5
+bindsym $mod+Super_L+6 rename workspace to $ws6
+bindsym $mod+Super_L+7 rename workspace to $ws7
+bindsym $mod+Super_L+8 rename workspace to $ws8
+bindsym $mod+Super_L+9 rename workspace to $ws9
+bindsym $mod+Super_L+0 rename workspace to $ws10
 
 # Lunch firefox
 bindsym --release $mod+ctrl+f exec firefox
@@ -283,4 +279,8 @@ exec numlockx on
 bindsym $mod+n exec ~/Documents/scripts/new_i3_workspace.sh
 
 # run mpd on starutp
-exec mpd
+exec gnome-terminal  -- ~/Documents/scripts/mpd.sh
+
+# desktop background image
+#exec feh --bg-fill --on-last-slide resume  --randomize --no-recursive --slideshow-delay 5 ~/Pictures/DESCTOP 
+exec feh --bg-fill ~/Pictures/DESCTOP/1057149__safe_artist-colon-sharpieboss_oc_oc+only_glass_solo_straw.png
